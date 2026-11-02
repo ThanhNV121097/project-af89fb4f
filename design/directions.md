@@ -1,5 +1,9 @@
 # Directions — a tiny product catalogue for one small shop
 
+CHOSEN: Window display — this shop sells on the owner's eye, not on range, so the page has
+to look like the window after closing time: one lit photograph of the shelves, the goods
+cut out on a lit tile, and the price said plainly in the lamp colour under each.
+
 Working name on the site: **Shelf** (the owner gave no name; this is a short, fitting
 one for a single-shelf shop, and the project's listed title is a working title, not a
 brand). Contact: brian.ng.2305@gmail.com.
