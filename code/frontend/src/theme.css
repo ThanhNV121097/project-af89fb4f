@@ -58,11 +58,11 @@
   --gutter: clamp(20px, 4.5vw, 56px);
   --header-h: 64px;
   --dock-space: 0px;
-  /* The tile a cut-out good stands on. Dark, because these goods were cut
-     out of their backdrops and the whole point of this direction is the
-     thing standing on the shop's own ground. */
-  --product-ground: #1C1B19;
-  --product-ground-ink: #A8A29A;
+  /* The tile a cut-out good stands on: the lit shelf inside a dark window.
+     Light, because an iron pan or a steel pot cut out onto #1C1B19 loses
+     its whole silhouette — three of four goods drew as empty tiles. */
+  --product-ground: #E7E2D8;
+  --product-ground-ink: #57534E;
 
   --picture-ground: var(--surface);
   --picture-ink: var(--ink-soft);
