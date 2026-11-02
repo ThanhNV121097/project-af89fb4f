@@ -4,7 +4,6 @@ import { T, useContent } from "../editable";
 import { usePageMeta } from "../seo";
 import { signIn } from "../lib/session";
 import Icon from "../components/Icon";
-import Logo from "../components/Logo";
 import { Picture } from "../picture";
 
 /**
@@ -41,7 +40,6 @@ export default function Login() {
     <div className="lg:grid lg:min-h-[calc(100vh-var(--header-h))] lg:grid-cols-2">
       <div className="flex flex-col justify-center px-[var(--gutter)] py-[var(--space-16)]">
         <div className="rise w-full max-w-[26rem]">
-          <Logo />
           <T k="pages.login.label" as="p" className="mt-[var(--space-8)] text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)] text-ink-soft" />
           <T k="pages.login.heading" as="h1" className="mt-[var(--space-3)] text-[length:var(--size-h1)]" />
           <T k="pages.login.sub" as="p" className="mt-[var(--space-4)] text-ink-soft" />
