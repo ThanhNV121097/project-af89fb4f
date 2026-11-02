@@ -131,8 +131,13 @@ function Form() {
           <div>
             <p className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)] text-ink-soft">The photo as it will look</p>
             <div className="mt-[var(--space-3)]">
-              <ProductImage src={photo} alt={name || "The product's photo"} aspect="1/1"
-                slot="/images/products/new.png" caption="Choose a photo above" />
+              {photo ? (
+                <ProductImage src={photo} alt={name || "The product's photo"} aspect="1/1" />
+              ) : (
+                <div className="flex aspect-square w-full items-end rounded border border-line p-[var(--space-4)] text-sm text-ink-soft">
+                  Choose a photo above and it appears here, on the shop's own ground.
+                </div>
+              )}
             </div>
           </div>
           <div className="border-t border-line pt-[var(--space-4)]">
