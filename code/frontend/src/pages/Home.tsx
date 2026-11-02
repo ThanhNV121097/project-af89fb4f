@@ -129,7 +129,10 @@ export default function Home() {
           </p>
         </div>
 
-        <Grid max={4} phone={1} className="mt-[var(--space-8)]">
+        {/* Two columns on a phone, not one: a full-width 1:1 card paints the
+            light shelf tile across the whole 390px viewport and the dark
+            ground disappears behind it. */}
+        <Grid max={4} phone={2} className="mt-[var(--space-8)]">
           {shelf.map((p) => <ProductCard key={p.id} product={p} />)}
         </Grid>
 
