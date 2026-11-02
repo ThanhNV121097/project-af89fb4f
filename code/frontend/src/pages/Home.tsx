@@ -93,7 +93,9 @@ export default function Home() {
           </div>
 
           {/* four goods, the row cut off by the right edge of the viewport */}
-          <div className="mt-[var(--space-8)] flex gap-[var(--space-4)] overflow-hidden border-t border-line pt-[var(--space-6)] lg:mt-[var(--space-12)]">
+          {/* The row bleeds off the right edge of the viewport; what the edge
+              cuts is still reachable, by dragging or with the wheel. */}
+          <div className="mt-[var(--space-8)] flex gap-[var(--space-4)] overflow-x-auto border-t border-line pt-[var(--space-6)] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden lg:mt-[var(--space-12)]">
             {window4.map((p, i) => (
               <figure
                 key={p.id}
