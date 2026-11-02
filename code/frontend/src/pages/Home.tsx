@@ -30,9 +30,11 @@ export default function Home() {
   // The window carries the four newest; the shelf below carries the others,
   // so no photograph is shown twice on the page.
   const { items: window4 } = useCollection<Product>("products", { pageSize: 4 });
-  const rest = useCollection<Product>("products", { pageSize: 4, page: 2 });
+  const rest = useCollection<Product>("products", { pageSize: 8 });
   const email = useContent<string>("contact.email");
   const newest = window4[0];
+  const inWindow = new Set(window4.map((p) => p.id));
+  const shelf = rest.items.filter((p) => !inWindow.has(p.id));
 
   return (
     <>
@@ -130,7 +132,7 @@ export default function Home() {
         </div>
 
         <Grid max={4} phone={1} className="mt-[var(--space-8)]">
-          {rest.items.map((p) => <ProductCard key={p.id} product={p} />)}
+          {shelf.map((p) => <ProductCard key={p.id} product={p} />)}
         </Grid>
 
         {rest.loading && <p className="mt-[var(--space-6)] text-sm text-ink-soft"><T k="shelf.loading" /></p>}
