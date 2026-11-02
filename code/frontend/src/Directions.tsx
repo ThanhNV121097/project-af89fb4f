@@ -24,7 +24,7 @@ const items: Item[] = [
 
 export function DirectionsWindow() {
   return (
-    <div style={{ minHeight: "100vh", background: "#121211", color: "#F2EFE8", fontFamily: "Archivo, sans-serif", display: "flex" }}>
+    <div style={{ minHeight: "100vh", overflow: "hidden", background: "#121211", color: "#F2EFE8", fontFamily: "Archivo, sans-serif", display: "flex" }}>
       <style>{FONTS}</style>
 
       {/* the shop photograph, bled to the left edge of the viewport, full height */}
@@ -46,7 +46,7 @@ export function DirectionsWindow() {
       </div>
 
       {/* the words and the shelf */}
-      <div style={{ flex: 1, minWidth: 0, padding: "56px 0 44px 64px", display: "flex", flexDirection: "column" }}>
+      <div style={{ flex: 1, minWidth: 0, overflow: "hidden", padding: "56px 0 44px 64px", display: "flex", flexDirection: "column" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", paddingRight: 56 }}>
           <span style={{ fontSize: 12, letterSpacing: "0.22em", textTransform: "uppercase", color: "#A8A29A" }}>Shelf · this week</span>
           <span style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#121211", background: "#D98B3A", padding: "5px 10px" }}>
@@ -121,15 +121,15 @@ export function DirectionsBoard() {
             <div
               key={it.name}
               style={{
-                display: "grid", gridTemplateColumns: "66px 156px 1fr auto", alignItems: "center", gap: 24,
-                borderBottom: "1px solid rgba(16,16,16,0.12)", padding: "10px 0",
+                display: "grid", gridTemplateColumns: "54px 252px 1fr auto", alignItems: "center", gap: 24,
+                borderBottom: "1px solid rgba(16,16,16,0.12)", padding: 0,
               }}
             >
-              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 44, fontWeight: 400, color: "#D4D4D1", fontVariantNumeric: "tabular-nums", letterSpacing: "-0.04em" }}>
+              <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 40, fontWeight: 400, color: "#6B6B6B", fontVariantNumeric: "tabular-nums", letterSpacing: "-0.04em" }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div style={{ height: 128, background: "#F4F4F2", display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
-                <img src={it.img} alt={it.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+              <div style={{ height: 150, background: "#F4F4F2" }}>
+                <img src={it.img} alt={it.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 8, boxSizing: "border-box" }} />
               </div>
               <div>
                 <div style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 28, fontWeight: 500, letterSpacing: "-0.03em" }}>{it.name}</div>
