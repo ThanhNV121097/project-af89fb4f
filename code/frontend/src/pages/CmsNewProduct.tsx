@@ -20,7 +20,7 @@ import { messageFor, send } from "../lib/mock/telegram";
  * leaves the browser here.
  */
 export default function CmsNewProduct() {
-  usePageMeta("pages.cms_new.title", "pages.cms_new.description");
+  usePageMeta("pages.cms_new.name", "pages.cms_new.description");
   return (
     <RequireSignIn>
       <Form />
