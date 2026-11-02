@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { usePageMeta } from "../seo";
 import { useCollection } from "../data";
@@ -45,13 +45,13 @@ function Form() {
   const group = telegram[0]?.group ?? "";
   const preview = messageFor(name, price);
 
-  function onPhoto(e: React.ChangeEvent<HTMLInputElement>) {
+  function onPhoto(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setPhoto(URL.createObjectURL(file));
   }
 
-  function submit(e: React.FormEvent) {
+  function submit(e: FormEvent) {
     e.preventDefault();
     const amount = Number(price);
     if (!name.trim() || !note.trim() || !Number.isFinite(amount) || amount <= 0) {
