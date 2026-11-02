@@ -46,6 +46,7 @@ function Shell() {
   const links = useList<{ label: string; href: string }>("nav.links");
   const name = useContent<string>("site.name");
   const session = useSession();
+  const email = useContent<string>("contact.email");
   const [open, setOpen] = useState(false);
   return (
     <div className="flex min-h-screen flex-col bg-ground text-ink font-body">
@@ -104,7 +105,7 @@ function Shell() {
           </div>
           <div className="flex flex-col gap-[var(--space-2)]">
             <p className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)]"><T k="footer.reach" /></p>
-            <a href={`mailto:${useContent<string>("contact.email")}`} className="inline-flex items-center gap-2 text-ink hover:text-accent">
+            <a href={`mailto:${email}`} className="inline-flex items-center gap-2 text-ink hover:text-accent">
               <Icon name="mail" size={16} />
               <T k="contact.email" />
             </a>
