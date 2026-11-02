@@ -1,10 +1,10 @@
 [
   {
-    "id": "moka-pot",
-    "name": "Moka pot, six cup",
-    "note": "Cast aluminium, screws apart to wash. Takes a fine grind.",
-    "price": 64,
-    "image": "/images/products-moka-pot.png",
+    "id": "kitchen-scale",
+    "name": "Kitchen scale, 5kg",
+    "note": "Mechanical, no battery. Reads in grams and ounces.",
+    "price": 46,
+    "image": "/images/products-scale.png",
     "added": "2026-10-28",
     "_source": "assumed",
     "_picture": "stand-in"
@@ -30,11 +30,11 @@
     "_picture": "stand-in"
   },
   {
-    "id": "kitchen-scale",
-    "name": "Kitchen scale",
-    "note": "Mechanical, no battery. Reads in grams and ounces.",
-    "price": 46,
-    "image": "/images/spoon.png",
+    "id": "candy-jar",
+    "name": "Sweet jar, 2 litre",
+    "note": "Pressed glass with a ground stopper. For the counter.",
+    "price": 28,
+    "image": "/images/jar.png",
     "added": "2026-10-24",
     "_source": "assumed",
     "_picture": "stand-in"
