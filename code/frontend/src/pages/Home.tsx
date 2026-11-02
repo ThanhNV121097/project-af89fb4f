@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <>
       {/* ── the window ─────────────────────────────────────────────── */}
-      <section className="lg:grid lg:grid-cols-[minmax(300px,34vw)_1fr] lg:h-[calc(100vh-var(--header-h))] lg:min-h-[640px]">
+      <section className="lg:grid lg:grid-cols-[minmax(300px,30vw)_1fr] lg:h-[calc(100vh-var(--header-h))] lg:min-h-[600px]">
         {/* the photograph, bled to the left edge of the viewport, no margin */}
         <div className="relative h-[46vh] min-h-[280px] overflow-hidden lg:h-full fade">
           <Picture
@@ -93,12 +93,12 @@ export default function Home() {
           </div>
 
           {/* four goods, the row cut off by the right edge of the viewport */}
-          <div className="mt-[var(--space-8)] flex gap-px overflow-hidden border-t border-line pt-[var(--space-4)] lg:mt-auto">
+          <div className="mt-[var(--space-8)] flex gap-[var(--space-4)] overflow-hidden border-t border-line pt-[var(--space-6)] lg:mt-[var(--space-12)]">
             {window4.map((p, i) => (
               <figure
                 key={p.id}
                 data-record={`products:${p.id}`}
-                className={`rise m-0 w-[150px] shrink-0 md:w-[180px] lg:w-[16vw] lg:max-w-[215px] ${i === 3 ? "hidden xl:block" : i === 2 ? "hidden md:block" : ""}`}
+                className="rise m-0 w-[150px] shrink-0 sm:w-[190px] lg:w-[230px]"
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
                 <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
@@ -110,11 +110,7 @@ export default function Home() {
                 </figcaption>
               </figure>
             ))}
-            {/* the row reads as continuing: one more tile, cut by the edge */}
-            <div aria-hidden="true" className="flex shrink-0 gap-px opacity-40">
-              <div className="aspect-square w-[150px] bg-surface md:w-[180px] lg:w-[16vw] lg:max-w-[215px]" />
-              <div className="aspect-square w-[150px] bg-surface md:w-[180px] lg:w-[16vw] lg:max-w-[215px]" />
-            </div>
+
           </div>
         </div>
       </section>
