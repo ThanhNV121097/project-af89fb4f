@@ -54,18 +54,30 @@ export function DirectionsWindow() {
           </span>
         </div>
 
-        <h1 style={{ margin: "44px 0 0", fontSize: 56, lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.025em" }}>
-          Four things worth<br />carrying home.
-        </h1>
-        <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 16, lineHeight: 1.6, color: "#A8A29A" }}>
-          Everything on the shelf is here because we use it ourselves. Prices are what you pay at the counter.
-        </p>
+        <div style={{ display: "flex", alignItems: "flex-end", gap: 48, paddingRight: 56, marginTop: 40 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <h1 style={{ margin: 0, fontSize: 56, lineHeight: 1.05, fontWeight: 500, letterSpacing: "-0.025em" }}>
+              Four things worth<br />carrying home.
+            </h1>
+            <p style={{ margin: "20px 0 0", maxWidth: 420, fontSize: 16, lineHeight: 1.6, color: "#A8A29A" }}>
+              Everything on the shelf is here because we use it ourselves. Prices are what you pay at the counter.
+            </p>
+          </div>
+          <dl style={{ margin: 0, flex: "0 0 200px", fontSize: 13, color: "#A8A29A" }}>
+            {[["On the shelf", "4 items"], ["Last added", "Café cup, white"], ["Ask us", "brian.ng.2305@gmail.com"]].map(([k, v]) => (
+              <div key={k} style={{ borderTop: "1px solid rgba(242,239,232,0.14)", padding: "10px 0" }}>
+                <dt style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase" }}>{k}</dt>
+                <dd style={{ margin: "4px 0 0", color: "#F2EFE8", wordBreak: "break-word" }}>{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
 
         {/* the shelf: cut-outs on the dark ground, the row running off the right edge */}
         <div style={{ marginTop: "auto", display: "flex", gap: 1, borderTop: "1px solid rgba(242,239,232,0.14)", marginRight: -110 }}>
           {items.map((it) => (
             <figure key={it.name} style={{ margin: 0, flex: "0 0 238px", background: "#1C1B19", paddingBottom: 18 }}>
-              <div style={{ height: 206, display: "flex", alignItems: "center", justifyContent: "center", padding: it.pad }}>
+              <div style={{ height: 232, display: "flex", alignItems: "center", justifyContent: "center", padding: it.pad }}>
                 <img src={it.img} alt={it.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
               </div>
               <figcaption style={{ padding: "0 18px" }}>
@@ -109,14 +121,14 @@ export function DirectionsBoard() {
             <div
               key={it.name}
               style={{
-                display: "grid", gridTemplateColumns: "66px 108px 1fr auto", alignItems: "center", gap: 24,
-                borderBottom: "1px solid rgba(16,16,16,0.12)", padding: "13px 0",
+                display: "grid", gridTemplateColumns: "66px 156px 1fr auto", alignItems: "center", gap: 24,
+                borderBottom: "1px solid rgba(16,16,16,0.12)", padding: "10px 0",
               }}
             >
               <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 44, fontWeight: 400, color: "#D4D4D1", fontVariantNumeric: "tabular-nums", letterSpacing: "-0.04em" }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div style={{ height: 100, background: "#F4F4F2", display: "flex", alignItems: "center", justifyContent: "center", padding: 10 }}>
+              <div style={{ height: 128, background: "#F4F4F2", display: "flex", alignItems: "center", justifyContent: "center", padding: 12 }}>
                 <img src={it.img} alt={it.name} style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
               </div>
               <div>
