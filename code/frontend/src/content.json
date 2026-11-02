@@ -33,7 +33,7 @@
       "href": "#shelf",
       "label": "See the whole shelf"
     },
-    "edge": "Open Tue – Sat",
+    "edge": "Shelf — the shop's own list",
     "eyebrow": "On the shelf this week",
     "headline": "What is in the shop, and what it costs.",
     "stats": {
@@ -41,7 +41,7 @@
       "count": "On the shelf",
       "newest": "Last added"
     },
-    "sub": "Everything here is on the shelf today. Nothing is ordered online — come in, or write and ask us to hold it."
+    "sub": "Everything here is on the shelf today. Nothing is ordered online — this page is the list, with what each thing costs."
   },
   "nav": {
     "cta": {
