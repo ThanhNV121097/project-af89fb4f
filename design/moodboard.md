@@ -60,19 +60,11 @@ real table, the page's action top right, no hero and no footer.
 
 ## COMMITMENTS
 
-1. The shop photograph bleeds off the **left** edge of the viewport, full height of the
-   first screen, with no margin and no rounding, at every width from 1024px up.
-2. The goods row at the foot of the first screen runs **past the right edge** of the
-   viewport, cut mid-card, so the shelf reads as continuing.
-3. Every price is set in the accent `#D98B3A`, tabular, 30px at 1440 — **larger than the
-   product name** (22px) on every card and every row.
-4. A small-caps letterspaced label runs **vertically up the left edge** of the hero
-   photograph.
-5. Catalogue cards have no border and no shadow: a `#1C1B19` tile with the cut-out good on
-   it, the name and price on one baseline under a single hairline rule.
-6. The CMS is a left-menu application: menu always on screen above 1024px, a real `<table>`
-   with its total under it, the page's action top right, and no marketing header or footer.
-7. The sign-in page is split in two full-height halves — the form on the left on the same
-   left edge as the home page's words, the photograph full-bleed on the right half.
-8. The add-product form shows the **exact Telegram message** it will send, in the accent,
-   written live as the name and the price are typed.
+- The shop photograph bleeds off the left edge of the viewport, full height of the first screen, with no margin and no rounding, at every width from 1024px up.
+- The goods row at the foot of the first screen runs past the right edge of the viewport, cut mid-card, so the shelf reads as continuing.
+- Every price is set in the accent #D98B3A, tabular, 30px at 1440 — larger than the product name (22px) on every card and every row.
+- A small-caps letterspaced label runs vertically up the left edge of the hero photograph.
+- Catalogue cards have no border and no shadow: a #1C1B19 tile with the cut-out good on it, the name and price on one baseline under a single hairline rule.
+- The CMS is a left-menu application: menu always on screen above 1024px, a real table with its total under it, the page's action top right, and no marketing header or footer.
+- The sign-in page is split in two full-height halves — the form on the left on the same left edge as the home page's words, the photograph full-bleed on the right half.
+- The add-product form shows the exact Telegram message it will send, in the accent, written live as the name and the price are typed.
