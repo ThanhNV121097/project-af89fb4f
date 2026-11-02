@@ -75,7 +75,7 @@ export default function Login() {
             <a href={`mailto:${ownerEmail}`} className="text-ink hover:text-accent">{ownerEmail}</a>
           </p>
           <Link to="/" className="mt-[var(--space-4)] inline-flex items-center gap-2 text-sm text-ink-soft hover:text-ink">
-            <Icon name="back" size={16} />
+            <Icon name="back" size={18} />
             <T k="pages.login.back" />
           </Link>
         </div>
