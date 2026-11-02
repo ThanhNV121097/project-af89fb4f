@@ -1,73 +1,121 @@
-import { useState } from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import { T, useList, useContent } from "./editable";
+import { useEffect, useState } from "react";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
+import { T, useContent, useList } from "./editable";
 import Home from "./pages/Home";
-import { DirectionsWindow, DirectionsBoard } from "./Directions";
+import Login from "./pages/Login";
+import CmsProducts from "./pages/CmsProducts";
+import CmsNewProduct from "./pages/CmsNewProduct";
 import Logo from "./components/Logo";
+import Icon from "./components/Icon";
 import MenuToggle from "./components/MenuToggle";
-import ContactDock from "./components/ContactDock";
+import MobileMenu from "./components/MobileMenu";
 import PhotoCredits from "./components/PhotoCredits";
+import { PageViews } from "./site";
+import { useSession, signOut } from "./lib/session";
 
 /**
- * The shell the design replaces.
+ * Shelf. Three screens, as the owner asked: the public shelf, one sign-in,
+ * and the CMS behind it (the product list and the form that adds one).
  *
- * This file is a placeholder so the scaffold builds and runs before the
- * design exists. The team rewrites it and adds components under
- * src/components/; what must stay is the rule every component follows: the
- * words come from content.json through <T/>, the colours from theme.css.
- *
- * The site has pages, not only a home page: each is a file in src/pages/ and
- * a <Route> below, sharing the header and footer. The footer keeps
- * <PhotoCredits/>: the stock photos' credits, which their licences ask for.
+ * The CMS pages are an application and draw their own shell
+ * (DashboardLayout), so they sit outside the site's header and footer.
  */
 export default function App() {
   return (
-    <Routes>
-      {/* The two direction screens render outside the shell, on their own. */}
-      <Route path="/directions-1" element={<DirectionsWindow />} />
-      <Route path="/directions-2" element={<DirectionsBoard />} />
-      <Route path="*" element={<Shell />} />
-    </Routes>
+    <>
+      <PageViews />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/cms/products" element={<CmsProducts />} />
+        <Route path="/cms/products/new" element={<CmsNewProduct />} />
+        <Route path="*" element={<Shell />} />
+      </Routes>
+    </>
   );
+}
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
 }
 
 function Shell() {
   const links = useList<{ label: string; href: string }>("nav.links");
-  const name = useContent("site.name");
-  // The CTA's own target, from content.json. It used to be href="#contact"
-  // written into the JSX while `nav.cta.href` sat in the file unread — so a
-  // design that moved contact onto a page of its own changed the key, nothing
-  // read it, and the header's one button scrolled nowhere. A key nothing reads
-  // is worse than a missing key: it looks answered.
-  const cta = useContent("nav.cta.href") || "/";
+  const name = useContent<string>("site.name");
+  const session = useSession();
   const [open, setOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-ground text-ink font-body">
-      <header className="mx-auto max-w-page px-[var(--gutter)] py-6 flex items-center justify-between">
-        <Link to="/" aria-label={name}><Logo /></Link>
-        <nav className="hidden lg:flex items-center gap-6 text-sm">
-          {links.map((l, i) => <T key={i} k={`nav.links.${i}.label`} as="a" href={l.href} />)}
-          <T k="nav.cta.label" as="a" href={cta} className="rounded bg-accent px-4 py-2 text-accent-ink" />
-        </nav>
-        <div className="flex items-center gap-1 lg:hidden">
-          <MenuToggle open={open} onToggle={() => setOpen((o) => !o)} />
+    <div className="flex min-h-screen flex-col bg-ground text-ink font-body">
+      <header className="sticky top-0 z-50 h-[var(--header-h)] border-b border-line bg-ground">
+        <div className="flex h-full items-center justify-between px-[var(--gutter)]">
+          <Link to="/" aria-label={name}><Logo /></Link>
+          <nav className="hidden items-center gap-[var(--space-8)] text-sm lg:flex">
+            {links.map((l, i) => (
+              <Link key={l.href} to={l.href} className="text-ink-soft transition-colors hover:text-ink">
+                <T k={`nav.links.${i}.label`} />
+              </Link>
+            ))}
+            {session ? (
+              <button type="button" onClick={signOut} className="inline-flex items-center gap-2 text-sm text-ink-soft hover:text-ink">
+                <Icon name="logout" size={18} />
+                <T k="nav.signout" />
+              </button>
+            ) : (
+              <Link to="/login" data-testid="header-signin" className="inline-flex items-center gap-2 border border-line px-[var(--space-4)] py-2 text-sm transition-colors hover:border-accent hover:text-accent">
+                <Icon name="lock" size={16} />
+                <T k="nav.cta.label" />
+              </Link>
+            )}
+          </nav>
+          <div className="lg:hidden">
+            <MenuToggle open={open} onToggle={() => setOpen((o) => !o)} />
+          </div>
         </div>
       </header>
-      {open && (
-        <nav className="fixed inset-0 top-[88px] z-40 flex flex-col gap-6 bg-ground px-[var(--gutter)] py-10 text-2xl lg:hidden">
-          {links.map((l, i) => <T key={i} k={`nav.links.${i}.label`} as="a" href={l.href} />)}
-        </nav>
-      )}
-      <main className="mx-auto max-w-page px-[var(--gutter)] py-24">
+
+      <MobileMenu open={open} onClose={() => setOpen(false)}>
+        {links.map((l, i) => (
+          <Link key={l.href} to={l.href} onClick={() => setOpen(false)} className="text-3xl font-display">
+            <T k={`nav.links.${i}.label`} />
+          </Link>
+        ))}
+        <Link to="/login" onClick={() => setOpen(false)} className="inline-flex w-fit items-center gap-2 border border-line px-[var(--space-4)] py-3">
+          <Icon name="lock" size={18} />
+          <T k="nav.cta.label" />
+        </Link>
+      </MobileMenu>
+
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Home />} />
         </Routes>
       </main>
-      <footer className="mx-auto max-w-page px-[var(--gutter)] py-12 text-sm text-ink-soft border-t border-line">
-        <T k="footer.line" /> · {name}
-        <PhotoCredits className="mt-3" />
+
+      <footer className="mt-[var(--space-16)] border-t border-line px-[var(--gutter)] py-[var(--space-12)] text-sm text-ink-soft">
+        <div className="flex flex-col gap-[var(--space-6)] lg:flex-row lg:items-start lg:justify-between">
+          <div className="max-w-[34ch]">
+            <Logo />
+            <T k="footer.line" as="p" className="mt-[var(--space-3)]" />
+          </div>
+          <div className="flex flex-col gap-[var(--space-2)]">
+            <p className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)]"><T k="footer.reach" /></p>
+            <a href={`mailto:${useContent<string>("contact.email")}`} className="inline-flex items-center gap-2 text-ink hover:text-accent">
+              <Icon name="mail" size={16} />
+              <T k="contact.email" />
+            </a>
+            <Link to="/login" className="inline-flex items-center gap-2 hover:text-ink">
+              <Icon name="lock" size={16} />
+              <T k="nav.cta.label" />
+            </Link>
+          </div>
+        </div>
+        <PhotoCredits className="mt-[var(--space-8)] border-t border-line pt-[var(--space-4)]" />
       </footer>
-      <ContactDock />
     </div>
   );
 }
