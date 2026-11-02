@@ -63,10 +63,12 @@
   "pages": {
     "cms_new": {
       "description": "A photo, a name, a short description and a price. Saving it posts the name and price to the shop's Telegram group.",
+      "name": "Add a product",
       "title": "Add a product — Shelf"
     },
     "cms_products": {
       "description": "Everything on the shelf, with its price and the day it was added.",
+      "name": "Products",
       "title": "Products — Shelf"
     },
     "login": {
@@ -76,6 +78,7 @@
       "error": "Fill in both the email and the password.",
       "heading": "Sign in to the shelf.",
       "label": "The shop's side",
+      "name": "Sign in",
       "no_signup": "There is no public sign-up. To have an account added, write to",
       "password": "Password",
       "sub": "This is where the shop's products are added and edited. One account each, for the owner and the shop's admins.",
