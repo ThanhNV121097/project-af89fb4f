@@ -6,7 +6,7 @@ import { useCollection } from "../data";
 import { useTableQuery } from "../lib/table";
 import DashboardLayout from "../components/DashboardLayout";
 import DataTable from "../components/DataTable";
-import TableFilters, { SearchBox } from "../components/TableFilters";
+import TableFilters from "../components/TableFilters";
 import Icon from "../components/Icon";
 import ProductImage from "../components/ProductImage";
 import RequireSignIn from "../components/RequireSignIn";
@@ -71,10 +71,17 @@ function List() {
       }
     >
       <TableFilters onClear={t.filtering ? t.clear : undefined}>
-        <label htmlFor="products-search" className="sr-only">Search products</label>
-        <div id="products-search-wrap">
-          <SearchBox value={t.q} onChange={t.setQ} placeholder="Search products" />
-        </div>
+        <label htmlFor="products-search" className="flex flex-col gap-1">
+          <span className="sr-only">Search products</span>
+          <input
+            id="products-search"
+            type="search"
+            value={t.q}
+            placeholder="Search products"
+            onChange={(e) => t.setQ(e.target.value)}
+            className="min-w-[14rem] appearance-none rounded border border-field bg-surface px-3 py-2 text-sm text-ink outline-none focus:border-accent"
+          />
+        </label>
       </TableFilters>
 
       <p data-testid="products-total" className="text-sm text-ink-soft [font-variant-numeric:tabular-nums]">
