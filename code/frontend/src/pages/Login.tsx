@@ -16,7 +16,7 @@ import { Picture } from "../picture";
  * password is checked; the backend story replaces it behind the same names.
  */
 export default function Login() {
-  usePageMeta("pages.login.title", "pages.login.description");
+  usePageMeta("pages.login.name", "pages.login.description");
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
