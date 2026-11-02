@@ -30,11 +30,11 @@
     "_picture": "stand-in"
   },
   {
-    "id": "market-basket",
-    "name": "Willow market basket",
-    "note": "Woven willow with a bound rim. Holds a week of vegetables.",
+    "id": "kitchen-scale",
+    "name": "Kitchen scale, 5kg",
+    "note": "Mechanical, no battery. Reads in grams and ounces.",
     "price": 46,
-    "image": "/images/products-basket.png",
+    "image": "/images/spoon.png",
     "added": "2026-10-24",
     "_source": "assumed",
     "_picture": "stand-in"
