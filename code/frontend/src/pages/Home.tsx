@@ -101,7 +101,7 @@ export default function Home() {
                 className="rise m-0 w-[150px] shrink-0 sm:w-[190px] lg:w-[230px]"
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
-                <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
+                <ProductImage src={p.image} alt={p.name} aspect="1/1" eager slot={`/images/products/${p.id}.png`} />
                 <figcaption className="mt-[var(--space-3)] border-t border-line pt-[var(--space-2)] pr-[var(--space-6)]">
                   <span className="block font-display text-[length:var(--size-price)] leading-none tracking-[var(--tracking-display)] text-accent [font-variant-numeric:tabular-nums]">
                     {formatPrice(p.price)}
