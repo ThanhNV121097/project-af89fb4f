@@ -82,8 +82,8 @@ export default function Login() {
       </div>
 
       <div className="relative hidden overflow-hidden lg:block fade">
-        <Picture src="/images/back-room.jpg" alt="The counter at the back of the shop, lit for the evening"
-          loading="eager" width={852} height={1280}
+        <Picture src="/images/shop-tall.jpg" alt="The workbench at the back of the shop"
+          loading="eager" width={900} height={1300}
           className="absolute inset-0 h-full w-full object-cover" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ground to-transparent" />
       </div>
