@@ -27,8 +27,10 @@ interface Product {
  * Everything below it is the rest of the shelf, paged.
  */
 export default function Home() {
+  // The window carries the four newest; the shelf below carries the others,
+  // so no photograph is shown twice on the page.
   const { items: window4 } = useCollection<Product>("products", { pageSize: 4 });
-  const rest = useCollection<Product>("products", { pageSize: 8, page: 1 });
+  const rest = useCollection<Product>("products", { pageSize: 4, page: 2 });
   const email = useContent<string>("contact.email");
   const newest = window4[0];
 
@@ -94,7 +96,7 @@ export default function Home() {
               <figure
                 key={p.id}
                 data-record={`products:${p.id}`}
-                className="rise m-0 w-[220px] shrink-0 lg:w-[19vw] lg:max-w-[250px]"
+                className="rise m-0 w-[200px] shrink-0 lg:w-[17vw] lg:max-w-[230px]"
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
                 <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
@@ -102,10 +104,14 @@ export default function Home() {
                   <span className="block font-display text-[length:var(--size-price)] leading-none tracking-[var(--tracking-display)] text-accent [font-variant-numeric:tabular-nums]">
                     {formatPrice(p.price)}
                   </span>
-                  <span className="mt-[var(--space-2)] block font-display text-[length:var(--size-name)] leading-tight tracking-[var(--tracking-display)]">{p.name}</span>
+                  <span className="mt-[var(--space-2)] block text-sm text-ink-soft">{p.name}</span>
                 </figcaption>
               </figure>
             ))}
+            {/* the row reads as continuing: one more tile, cut by the edge */}
+            <div aria-hidden="true" className="w-[200px] shrink-0 opacity-50 lg:w-[17vw] lg:max-w-[230px]">
+              <div className="aspect-square w-full bg-surface" />
+            </div>
           </div>
         </div>
       </section>
@@ -120,6 +126,8 @@ export default function Home() {
           <p className="text-sm text-ink-soft [font-variant-numeric:tabular-nums]">
             <T k="shelf.total" /> {rest.total}
           </p>
+        </div>
+        <div className="sr-only">
         </div>
 
         <Grid max={4} phone={1} className="mt-[var(--space-8)]">
