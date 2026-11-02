@@ -48,9 +48,9 @@ export default function Home() {
             loading="eager"
             width={1000}
             height={1400}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover [filter:saturate(0.72)_brightness(0.82)]"
           />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ground/50 via-transparent to-ground" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ground/60 via-ground/10 to-ground" />
           <span className="absolute bottom-[var(--space-8)] left-[var(--space-4)] text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)] text-ink [writing-mode:vertical-rl] rotate-180">
             <T k="hero.edge" />
           </span>
