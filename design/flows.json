@@ -23,7 +23,7 @@
     "auth": true,
     "steps": [
       { "action": "open", "path": "/cms/products" },
-      { "action": "type", "selector": "#products-search", "value": "skillet" },
+      { "action": "type", "selector": "#products-search", "value": "frying" },
       { "action": "press", "selector": "#products-search", "key": "Enter" },
       { "action": "expect", "selector": "[data-testid='products-total']", "text": "1" }
     ]
