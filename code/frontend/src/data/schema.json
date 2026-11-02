@@ -1,3 +1,30 @@
 {
-  "collections": {}
+  "collections": {
+    "products": {
+      "label": "Products",
+      "fields": [
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "note", "label": "Short description", "type": "longtext" },
+        { "key": "price", "label": "Price", "type": "price", "currency": "USD" },
+        { "key": "image", "label": "Photo", "type": "image" },
+        { "key": "added", "label": "Added", "type": "text" }
+      ]
+    },
+    "telegram": {
+      "label": "Telegram group",
+      "fields": [
+        { "key": "bot", "label": "Bot name (from @BotFather)", "type": "text" },
+        { "key": "group", "label": "Group name", "type": "text" },
+        { "key": "chat_id", "label": "Group chat ID", "type": "text" }
+      ]
+    },
+    "admins": {
+      "label": "Who can sign in",
+      "fields": [
+        { "key": "email", "label": "Email", "type": "text" },
+        { "key": "name", "label": "Name", "type": "text" },
+        { "key": "role", "label": "Role", "type": "text" }
+      ]
+    }
+  }
 }

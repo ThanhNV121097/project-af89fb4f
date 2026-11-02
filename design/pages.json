@@ -1,4 +1,6 @@
 [
-  { "path": "/directions-1", "name": "Window display" },
-  { "path": "/directions-2", "name": "The price board" }
+  { "path": "/", "name": "The shelf" },
+  { "path": "/login", "name": "Sign in" },
+  { "path": "/cms/products", "name": "Products", "auth": true },
+  { "path": "/cms/products/new", "name": "Add a product", "auth": true }
 ]
