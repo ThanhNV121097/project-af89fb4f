@@ -94,7 +94,7 @@
   },
   "site": {
     "description": "A short shelf of kitchen and table goods from one small shop, each with a photograph, a description and a price.",
-    "locale": "en-GB",
+    "locale": "en-US",
     "logo": "",
     "name": "Shelf"
   }
