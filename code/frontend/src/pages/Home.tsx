@@ -127,8 +127,6 @@ export default function Home() {
             <T k="shelf.total" /> {rest.total}
           </p>
         </div>
-        <div className="sr-only">
-        </div>
 
         <Grid max={4} phone={1} className="mt-[var(--space-8)]">
           {rest.items.map((p) => <ProductCard key={p.id} product={p} />)}
