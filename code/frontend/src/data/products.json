@@ -11,18 +11,18 @@
   },
   {
     "id": "skillet",
-    "name": "Cast iron skillet, 26cm",
+    "name": "Iron frying pan, 26cm",
     "note": "Pre-seasoned, oven to table. Heavy enough to hold its heat.",
     "price": 88,
-    "image": "/images/products-skillet.png",
+    "image": "/images/pan.png",
     "added": "2026-10-27",
     "_source": "assumed",
     "_picture": "stand-in"
   },
   {
     "id": "stoneware-plate",
-    "name": "Stoneware plate, 24cm",
-    "note": "Thrown and glazed by hand, so no two edges match.",
+    "name": "Banded bowl, 14cm",
+    "note": "Hand-painted bands on white earthenware. For breakfast or soup.",
     "price": 26,
     "image": "/images/products-stoneware-plate.png",
     "added": "2026-10-26",
