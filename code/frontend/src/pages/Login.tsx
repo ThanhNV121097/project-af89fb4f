@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { T, useContent } from "../editable";
 import { usePageMeta } from "../seo";
@@ -23,7 +23,7 @@ export default function Login() {
   const [error, setError] = useState(false);
   const ownerEmail = useContent<string>("contact.email");
 
-  function submit(e: React.FormEvent) {
+  function submit(e: FormEvent) {
     e.preventDefault();
     if (!email.trim() || !password) {
       setError(true);
