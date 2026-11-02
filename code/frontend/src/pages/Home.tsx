@@ -94,17 +94,15 @@ export default function Home() {
               <figure
                 key={p.id}
                 data-record={`products:${p.id}`}
-                className="rise m-0 w-[230px] shrink-0 lg:w-[22vw] lg:max-w-[260px]"
+                className="rise m-0 w-[260px] shrink-0 lg:w-[23vw] lg:max-w-[300px]"
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
                 <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
-                <figcaption className="mt-[var(--space-3)] border-t border-line pt-[var(--space-2)] pr-[var(--space-4)]">
-                  <div className="flex items-baseline justify-between gap-[var(--space-3)]">
-                    <span className="min-w-0 truncate font-display text-[length:var(--size-name)] tracking-[var(--tracking-display)]">{p.name}</span>
-                    <span className="shrink-0 font-display text-[length:var(--size-price)] leading-none tracking-[var(--tracking-display)] text-accent [font-variant-numeric:tabular-nums]">
-                      {formatPrice(p.price)}
-                    </span>
-                  </div>
+                <figcaption className="mt-[var(--space-3)] border-t border-line pt-[var(--space-2)] pr-[var(--space-6)]">
+                  <span className="block font-display text-[length:var(--size-price)] leading-none tracking-[var(--tracking-display)] text-accent [font-variant-numeric:tabular-nums]">
+                    {formatPrice(p.price)}
+                  </span>
+                  <span className="mt-[var(--space-2)] block font-display text-[length:var(--size-name)] leading-tight tracking-[var(--tracking-display)]">{p.name}</span>
                 </figcaption>
               </figure>
             ))}
