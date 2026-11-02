@@ -39,11 +39,11 @@ export default function Home() {
         {/* the photograph, bled to the left edge of the viewport, no margin */}
         <div className="relative h-[46vh] min-h-[280px] overflow-hidden lg:h-full fade">
           <Picture
-            src="/images/shop-front.jpg"
-            alt="Lamps lit over the shelves in the shop after closing"
+            src="/images/shop-window.jpg"
+            alt="Lamps lit in the shop window after closing"
             loading="eager"
-            width={796}
-            height={961}
+            width={1000}
+            height={1400}
             className="absolute inset-0 h-full w-full object-cover"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ground/50 via-transparent to-ground" />
@@ -94,7 +94,7 @@ export default function Home() {
               <figure
                 key={p.id}
                 data-record={`products:${p.id}`}
-                className="rise m-0 w-[260px] shrink-0 lg:w-[23vw] lg:max-w-[300px]"
+                className="rise m-0 w-[220px] shrink-0 lg:w-[19vw] lg:max-w-[250px]"
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
                 <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
