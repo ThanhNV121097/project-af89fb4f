@@ -30,11 +30,11 @@
     "_picture": "stand-in"
   },
   {
-    "id": "chopping-board",
-    "name": "Oak chopping board",
-    "note": "End grain, 40 by 28cm. Oil it twice a year and it outlives the kitchen.",
-    "price": 72,
-    "image": "/images/products-chopping-board.png",
+    "id": "market-basket",
+    "name": "Willow market basket",
+    "note": "Woven willow with a bound rim. Holds a week of vegetables.",
+    "price": 46,
+    "image": "/images/products-basket.png",
     "added": "2026-10-24",
     "_source": "assumed",
     "_picture": "stand-in"
