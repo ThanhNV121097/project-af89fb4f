@@ -1,26 +1,155 @@
+import { Link } from "react-router-dom";
 import { T, useContent } from "../editable";
-import ContactForm from "../components/ContactForm";
+import { useCollection } from "../data";
+import Grid from "../components/Grid";
+import Icon from "../components/Icon";
+import ProductCard from "../components/ProductCard";
+import ProductImage from "../components/ProductImage";
+import { Picture } from "../picture";
+import { formatPrice, formatDate } from "../lib/format";
+
+interface Product {
+  id: string;
+  name: string;
+  note?: string;
+  price?: number;
+  image?: string;
+  added?: string;
+}
 
 /**
- * The home page. Every other page goes beside it in src/pages/, one file each.
+ * The shelf — the public page.
  *
- * The hero's button and the header's both point at `nav.cta.href`, and the
- * section that answers it is below with that id on it. The scaffold used to
- * ship `href="#contact"` with no element of that id anywhere — a dead link in
- * the one thing a visitor is asked to press — and a design that moved contact
- * onto a page of its own kept the dead anchor. A link to #something with no
- * #something is now a walk defect (dead-anchor), so neither can ship again.
+ * The first screen is the window after closing time: the shop photograph bled
+ * off the left edge of the viewport, the name and one line of type on the
+ * right, and the shelf itself — four cut-out goods on the shop's own dark
+ * ground — running off the right edge so the row reads as continuing.
+ * Everything below it is the rest of the shelf, paged.
  */
 export default function Home() {
-  const cta = useContent("nav.cta.href") || "#contact";
+  const { items: window4 } = useCollection<Product>("products", { pageSize: 4 });
+  const rest = useCollection<Product>("products", { pageSize: 8, page: 1 });
+  const email = useContent<string>("contact.email");
+  const newest = window4[0];
+
   return (
     <>
-      <T k="hero.headline" as="h1" className="text-[length:var(--size-h1)] leading-[1.05] max-w-[16ch]" />
-      <T k="hero.sub" as="p" className="mt-6 text-xl text-ink-soft max-w-[48ch]" />
-      <T k="hero.cta.label" as="a" href={cta} className="mt-10 inline-block rounded bg-accent px-6 py-3 text-accent-ink" />
-      <section id={cta.startsWith("#") ? cta.slice(1) : "contact"} className="mt-24 border-t border-line pt-16">
-        <T k="contact.heading" as="h2" className="text-[length:var(--size-h2)]" />
-        <ContactForm className="mt-8 max-w-[40rem]" />
+      {/* ── the window ─────────────────────────────────────────────── */}
+      <section className="lg:grid lg:grid-cols-[minmax(300px,34vw)_1fr] lg:h-[calc(100vh-var(--header-h))] lg:min-h-[640px]">
+        {/* the photograph, bled to the left edge of the viewport, no margin */}
+        <div className="relative h-[46vh] min-h-[280px] overflow-hidden lg:h-full fade">
+          <Picture
+            src="/images/shop-front.jpg"
+            alt="Lamps lit over the shelves in the shop after closing"
+            loading="eager"
+            width={796}
+            height={961}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-ground/50 via-transparent to-ground" />
+          <span className="absolute bottom-[var(--space-8)] left-[var(--space-4)] text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)] text-ink [writing-mode:vertical-rl] rotate-180">
+            <T k="hero.edge" />
+          </span>
+        </div>
+
+        {/* the words, then the shelf running off the right edge */}
+        <div className="flex min-w-0 flex-col overflow-hidden pl-[var(--gutter)] pt-[var(--space-8)] lg:pt-[var(--space-12)]">
+          <div className="rise pr-[var(--gutter)]">
+            <T k="hero.eyebrow" as="p" className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)] text-ink-soft" />
+            <div className="mt-[var(--space-6)] flex flex-wrap items-end justify-between gap-[var(--space-8)]">
+              <div className="min-w-0">
+                <T k="hero.headline" as="h1" className="max-w-[18ch] text-[length:var(--size-h1)]" />
+                <T k="hero.sub" as="p" className="mt-[var(--space-4)] max-w-[46ch] text-ink-soft" />
+              </div>
+              <dl className="shrink-0 text-sm text-ink-soft">
+                <div className="border-t border-line py-[var(--space-2)]">
+                  <dt className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)]"><T k="hero.stats.count" /></dt>
+                  <dd data-testid="shelf-count" className="mt-1 text-ink [font-variant-numeric:tabular-nums]">{rest.total}</dd>
+                </div>
+                <div className="border-t border-line py-[var(--space-2)]">
+                  <dt className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)]"><T k="hero.stats.newest" /></dt>
+                  <dd className="mt-1 text-ink">{newest ? newest.name : ""}</dd>
+                </div>
+                <div className="border-t border-line py-[var(--space-2)]">
+                  <dt className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)]"><T k="hero.stats.ask" /></dt>
+                  <dd className="mt-1 break-all text-ink">
+                    <a href={`mailto:${email}`} className="hover:text-accent">{email}</a>
+                  </dd>
+                </div>
+              </dl>
+            </div>
+            <a
+              href="#shelf"
+              data-testid="to-catalogue"
+              className="mt-[var(--space-6)] inline-flex items-center gap-2 border-b border-accent pb-1 text-sm text-accent"
+            >
+              <T k="hero.cta.label" />
+              <Icon name="arrow" size={16} />
+            </a>
+          </div>
+
+          {/* four goods, the row cut off by the right edge of the viewport */}
+          <div className="mt-[var(--space-8)] flex gap-px overflow-hidden border-t border-line pt-[var(--space-4)] lg:mt-auto">
+            {window4.map((p, i) => (
+              <figure
+                key={p.id}
+                data-record={`products:${p.id}`}
+                className="rise m-0 w-[230px] shrink-0 lg:w-[22vw] lg:max-w-[260px]"
+                style={{ animationDelay: `${120 + i * 90}ms` }}
+              >
+                <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
+                <figcaption className="mt-[var(--space-3)] border-t border-line pt-[var(--space-2)] pr-[var(--space-4)]">
+                  <div className="flex items-baseline justify-between gap-[var(--space-3)]">
+                    <span className="min-w-0 truncate font-display text-[length:var(--size-name)] tracking-[var(--tracking-display)]">{p.name}</span>
+                    <span className="shrink-0 font-display text-[length:var(--size-price)] leading-none tracking-[var(--tracking-display)] text-accent [font-variant-numeric:tabular-nums]">
+                      {formatPrice(p.price)}
+                    </span>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── the whole shelf ────────────────────────────────────────── */}
+      <section id="shelf" className="mt-[var(--space-16)] px-[var(--gutter)]">
+        <div className="flex flex-wrap items-end justify-between gap-[var(--space-4)] border-b border-line pb-[var(--space-4)]">
+          <div>
+            <T k="shelf.label" as="p" className="text-[length:var(--size-label)] uppercase tracking-[var(--tracking-label)] text-ink-soft" />
+            <T k="shelf.heading" as="h2" className="mt-[var(--space-3)] text-[length:var(--size-h2)]" />
+          </div>
+          <p className="text-sm text-ink-soft [font-variant-numeric:tabular-nums]">
+            <T k="shelf.total" /> {rest.total}
+          </p>
+        </div>
+
+        <Grid max={4} phone={1} className="mt-[var(--space-8)]">
+          {rest.items.map((p) => <ProductCard key={p.id} product={p} />)}
+        </Grid>
+
+        {rest.loading && <p className="mt-[var(--space-6)] text-sm text-ink-soft"><T k="shelf.loading" /></p>}
+
+        {rest.hasMore && (
+          <button
+            type="button"
+            onClick={rest.loadMore}
+            data-testid="show-more"
+            className="mt-[var(--space-8)] inline-flex items-center gap-2 border border-line px-[var(--space-6)] py-3 text-sm transition-colors hover:border-accent hover:text-accent"
+          >
+            <T k="shelf.more" />
+            <Icon name="expand" size={16} />
+          </button>
+        )}
+
+        <p className="mt-[var(--space-12)] max-w-[52ch] border-t border-line pt-[var(--space-4)] text-sm text-ink-soft">
+          <T k="shelf.foot" />{" "}
+          {newest?.added ? formatDate(newest.added, "medium") : ""}
+        </p>
+        <Link to="/login" className="mt-[var(--space-4)] inline-flex items-center gap-2 text-sm text-ink-soft hover:text-accent">
+          <Icon name="lock" size={16} />
+          <T k="shelf.owner_link" />
+        </Link>
       </section>
     </>
   );
