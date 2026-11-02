@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import type { ReactNode } from "react";
 import { useSession } from "../lib/session";
+import { useDemo } from "../lib/demo";
 import { useContent } from "../editable";
 import Icon from "./Icon";
 import Logo from "./Logo";
@@ -13,8 +14,11 @@ import Logo from "./Logo";
  */
 export default function RequireSignIn({ children }: { children: ReactNode }) {
   const session = useSession();
+  const demo = useDemo();
   const email = useContent<string>("contact.email");
-  if (session) return <>{children}</>;
+  // Drawn for the Studio, the walk or the owner's preview: show the work, not
+  // the gate — nobody looking at the design has clicked sign in yet.
+  if (session || demo) return <>{children}</>;
   return (
     <div className="flex min-h-screen flex-col justify-center bg-ground px-[var(--gutter)] py-[var(--space-16)] text-ink">
       <div className="max-w-[30rem]">
