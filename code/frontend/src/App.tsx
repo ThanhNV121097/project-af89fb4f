@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link, Route, Routes } from "react-router-dom";
 import { T, useList, useContent } from "./editable";
 import Home from "./pages/Home";
-import { DirectionsWindow, DirectionsBoard } from "./pages/Directions";
+import { DirectionsWindow, DirectionsBoard } from "./Directions";
 import Logo from "./components/Logo";
 import MenuToggle from "./components/MenuToggle";
 import ContactDock from "./components/ContactDock";
