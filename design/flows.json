@@ -5,7 +5,7 @@
       { "action": "open", "path": "/" },
       { "action": "expect", "selector": "[data-testid='shelf-count']", "text": "12" },
       { "action": "click", "selector": "[data-testid='to-catalogue']" },
-      { "action": "expect", "selector": "[data-testid='product-moka-pot-price']", "text": "64" }
+      { "action": "expect", "selector": "[data-testid='product-glass-jar-price']", "text": "14" }
     ]
   },
   {
