@@ -96,7 +96,7 @@ export default function Home() {
               <figure
                 key={p.id}
                 data-record={`products:${p.id}`}
-                className="rise m-0 w-[200px] shrink-0 lg:w-[17vw] lg:max-w-[230px]"
+                className="rise m-0 w-[190px] shrink-0 lg:w-[16vw] lg:max-w-[215px]"
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
                 <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
@@ -104,12 +104,12 @@ export default function Home() {
                   <span className="block font-display text-[length:var(--size-price)] leading-none tracking-[var(--tracking-display)] text-accent [font-variant-numeric:tabular-nums]">
                     {formatPrice(p.price)}
                   </span>
-                  <span className="mt-[var(--space-2)] block text-sm text-ink-soft">{p.name}</span>
+                  <span className="mt-[var(--space-2)] block break-words text-sm text-ink-soft">{p.name}</span>
                 </figcaption>
               </figure>
             ))}
             {/* the row reads as continuing: one more tile, cut by the edge */}
-            <div aria-hidden="true" className="w-[200px] shrink-0 opacity-50 lg:w-[17vw] lg:max-w-[230px]">
+            <div aria-hidden="true" className="w-[190px] shrink-0 opacity-50 lg:w-[16vw] lg:max-w-[215px]">
               <div className="aspect-square w-full bg-surface" />
             </div>
           </div>
