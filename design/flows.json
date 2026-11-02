@@ -1,0 +1,44 @@
+[
+  {
+    "name": "See what is on the shelf and what it costs",
+    "steps": [
+      { "action": "open", "path": "/" },
+      { "action": "expect", "selector": "[data-testid='shelf-count']", "text": "12" },
+      { "action": "click", "selector": "[data-testid='to-catalogue']" },
+      { "action": "expect", "selector": "[data-testid='product-glass-jar-price']", "text": "14" }
+    ]
+  },
+  {
+    "name": "Sign in to the CMS",
+    "steps": [
+      { "action": "open", "path": "/login" },
+      { "action": "type", "selector": "#email", "value": "brian.ng.2305@gmail.com" },
+      { "action": "type", "selector": "#password", "value": "shelf-demo" },
+      { "action": "click", "selector": "[data-testid='sign-in']" },
+      { "action": "expect", "selector": "[data-testid='products-total']", "text": "12" }
+    ]
+  },
+  {
+    "name": "Find a product in the list",
+    "auth": true,
+    "steps": [
+      { "action": "open", "path": "/cms/products" },
+      { "action": "type", "selector": "#products-search", "value": "frying" },
+      { "action": "press", "selector": "#products-search", "key": "Enter" },
+      { "action": "expect", "selector": "[data-testid='products-total']", "text": "1" }
+    ]
+  },
+  {
+    "name": "Add a product and send it to Telegram",
+    "auth": true,
+    "steps": [
+      { "action": "open", "path": "/cms/products/new" },
+      { "action": "type", "selector": "#name", "value": "Copper measuring jug" },
+      { "action": "type", "selector": "#note", "value": "Half litre, stamped marks" },
+      { "action": "type", "selector": "#price", "value": "38" },
+      { "action": "expect", "selector": "[data-testid='telegram-preview']", "text": "Copper measuring jug" },
+      { "action": "click", "selector": "[data-testid='save-product']" },
+      { "action": "expect", "selector": "[data-testid='saved-notice']", "text": "Telegram" }
+    ]
+  }
+]

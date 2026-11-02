@@ -132,7 +132,7 @@ export default function DashboardLayout({ title, nav, actions, children, brand }
         createPortal(
           <div className="fixed inset-0 z-[60] lg:hidden">
             <button type="button" aria-label="Close" onClick={() => setOpen(false)} className="absolute inset-0 bg-ink/40" />
-            <div className="absolute inset-y-0 left-0 w-64 overflow-y-auto border-r border-line bg-surface">{menu}</div>
+            <div className="absolute inset-0 w-full overflow-y-auto bg-surface">{menu}</div>
           </div>,
           document.body,
         )}

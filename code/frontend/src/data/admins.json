@@ -1,0 +1,16 @@
+[
+  {
+    "id": "owner",
+    "email": "brian.ng.2305@gmail.com",
+    "name": "",
+    "role": "owner",
+    "_source": "owner"
+  },
+  {
+    "id": "admin-1",
+    "email": "",
+    "name": "",
+    "role": "admin",
+    "_source": "assumed"
+  }
+]

@@ -1,0 +1,6 @@
+[
+  { "path": "/", "name": "The shelf" },
+  { "path": "/login", "name": "Sign in" },
+  { "path": "/cms/products", "name": "Products", "auth": true },
+  { "path": "/cms/products/new", "name": "Add a product", "auth": true }
+]

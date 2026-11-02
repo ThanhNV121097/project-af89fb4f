@@ -1,61 +1,104 @@
 {
-  "site": {
-    "name": "Your business",
-    "logo": "",
-    "description": "One sentence on what the business is, for search results and shared links.",
-    "locale": "vi-VN"
-  },
-  "nav": {
-    "links": [
-      {
-        "label": "Home",
-        "href": "/"
-      }
-    ],
-    "cta": {
-      "label": "Get in touch",
-      "href": "#contact"
-    },
-    "menu": {
-      "open": "Open menu",
-      "close": "Close menu"
-    }
-  },
-  "hero": {
-    "eyebrow": "",
-    "headline": "A headline of a few words",
-    "sub": "One line under it, and no more.",
-    "cta": {
-      "label": "Get in touch",
-      "href": "#contact"
-    }
-  },
-  "footer": {
-    "line": "Your business · District 1, Saigon"
-  },
-  "credits": {
-    "label": "Photos"
-  },
   "contact": {
-    "heading": "Get in touch",
-    "phone": "",
-    "zalo": "",
-    "email": "",
     "address": "",
-    "hours": "",
     "dock": {
       "call": "Call us",
       "zalo": "Message us on Zalo"
     },
+    "email": "brian.ng.2305@gmail.com",
     "form": {
-      "name": "Your name",
-      "reply_to": "Phone or email",
+      "fields": {},
       "message": "Your message",
+      "name": "Your name",
+      "offline": "This form is not connected yet — call or message us instead.",
+      "reply_to": "Phone or email",
       "send": "Send",
       "sending": "Sending…",
-      "sent": "Thank you — we have your message and will answer soon.",
-      "offline": "This form is not connected yet — call or message us instead.",
-      "fields": {}
+      "sent": "Thank you — we have your message and will answer soon."
+    },
+    "heading": "Get in touch",
+    "hours": "",
+    "phone": "",
+    "zalo": ""
+  },
+  "credits": {
+    "label": "Photos"
+  },
+  "footer": {
+    "line": "One small shop, one shelf. Prices change when the stock does.",
+    "reach": "Reach us"
+  },
+  "hero": {
+    "cta": {
+      "href": "#shelf",
+      "label": "See the whole shelf"
+    },
+    "edge": "The shop's own list",
+    "eyebrow": "On the shelf this week",
+    "headline": "What is in the shop, and what it costs.",
+    "stats": {
+      "ask": "Ask us",
+      "count": "On the shelf",
+      "newest": "Last added"
+    },
+    "sub": "Everything here is on the shelf today. Nothing is ordered online — this page is the list, with what each thing costs."
+  },
+  "nav": {
+    "cta": {
+      "href": "/login",
+      "label": "Sign in"
+    },
+    "links": [
+      {
+        "href": "/",
+        "label": "The shelf"
+      }
+    ],
+    "menu": {
+      "close": "Close menu",
+      "open": "Open menu"
+    },
+    "signout": "Sign out"
+  },
+  "pages": {
+    "cms_new": {
+      "description": "A photo, a name, a short description and a price. Saving it posts the name and price to the shop's Telegram group.",
+      "name": "Add a product",
+      "title": "Add a product — Shelf"
+    },
+    "cms_products": {
+      "description": "Everything on the shelf, with its price and the day it was added.",
+      "name": "Products",
+      "title": "Products — Shelf"
+    },
+    "login": {
+      "back": "Back to the shelf",
+      "description": "The shop's own sign-in. The owner and the shop's admins only.",
+      "email": "Email",
+      "error": "Fill in both the email and the password.",
+      "heading": "Sign in to the shelf.",
+      "label": "The shop's side",
+      "name": "Sign in",
+      "no_signup": "There is no public sign-up. To have an account added, write to",
+      "password": "Password",
+      "sub": "This is where the shop's products are added and edited. One account each, for the owner and the shop's admins.",
+      "submit": "Sign in",
+      "title": "Sign in — Shelf"
     }
+  },
+  "shelf": {
+    "foot": "Prices are what you pay at the counter. Last added on",
+    "heading": "The shelf, in the order it arrived",
+    "label": "Everything in",
+    "loading": "Loading the next few…",
+    "more": "Show more",
+    "owner_link": "Shop sign-in",
+    "total": "Items:"
+  },
+  "site": {
+    "description": "A short shelf of kitchen and table goods from one small shop, each with a photograph, a description and a price.",
+    "locale": "en-US",
+    "logo": "",
+    "name": "Shelf"
   }
 }
