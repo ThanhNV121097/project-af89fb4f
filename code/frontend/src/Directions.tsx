@@ -121,14 +121,14 @@ export function DirectionsBoard() {
             <div
               key={it.name}
               style={{
-                display: "grid", gridTemplateColumns: "54px 252px 1fr auto", alignItems: "center", gap: 24,
+                display: "grid", gridTemplateColumns: "54px 300px 1fr auto", alignItems: "center", gap: 24,
                 borderBottom: "1px solid rgba(16,16,16,0.12)", padding: 0,
               }}
             >
               <span style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: 40, fontWeight: 400, color: "#6B6B6B", fontVariantNumeric: "tabular-nums", letterSpacing: "-0.04em" }}>
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <div style={{ height: 150, background: "#F4F4F2" }}>
+              <div style={{ height: 140, background: "#F4F4F2" }}>
                 <img src={it.img} alt={it.name} style={{ width: "100%", height: "100%", objectFit: "contain", padding: 8, boxSizing: "border-box" }} />
               </div>
               <div>
