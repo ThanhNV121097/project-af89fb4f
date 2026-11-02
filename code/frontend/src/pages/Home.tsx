@@ -96,7 +96,7 @@ export default function Home() {
               <figure
                 key={p.id}
                 data-record={`products:${p.id}`}
-                className="rise m-0 w-[190px] shrink-0 lg:w-[16vw] lg:max-w-[215px]"
+                className={`rise m-0 w-[150px] shrink-0 md:w-[180px] lg:w-[16vw] lg:max-w-[215px] ${i === 3 ? "hidden xl:block" : i === 2 ? "hidden md:block" : ""}`}
                 style={{ animationDelay: `${120 + i * 90}ms` }}
               >
                 <ProductImage src={p.image} alt={p.name} aspect="1/1" eager={i < 2} slot={`/images/products/${p.id}.png`} />
@@ -109,8 +109,9 @@ export default function Home() {
               </figure>
             ))}
             {/* the row reads as continuing: one more tile, cut by the edge */}
-            <div aria-hidden="true" className="w-[190px] shrink-0 opacity-50 lg:w-[16vw] lg:max-w-[215px]">
-              <div className="aspect-square w-full bg-surface" />
+            <div aria-hidden="true" className="flex shrink-0 gap-px opacity-40">
+              <div className="aspect-square w-[150px] bg-surface md:w-[180px] lg:w-[16vw] lg:max-w-[215px]" />
+              <div className="aspect-square w-[150px] bg-surface md:w-[180px] lg:w-[16vw] lg:max-w-[215px]" />
             </div>
           </div>
         </div>
