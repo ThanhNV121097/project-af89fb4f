@@ -29,7 +29,7 @@ interface Row {
  * top of the first page, where the real API will put them.
  */
 export default function CmsProducts() {
-  usePageMeta("pages.cms_products.title", "pages.cms_products.description");
+  usePageMeta("pages.cms_products.name", "pages.cms_products.description");
   return (
     <RequireSignIn>
       <List />
