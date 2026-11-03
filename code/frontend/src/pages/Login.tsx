@@ -12,9 +12,8 @@ import { Picture } from "../picture";
  * sign-up link anywhere on this site, by the owner's instruction, so the page
  * says in words who it is for and how a new admin is added.
  *
- * Checks against the mock admin list in lib/mock/owner-admin-sign-in.ts; the
- * backend story replaces that module with a real POST /v1/auth/login call,
- * behind the same signIn()/useSession() names.
+ * Checks against the real admins table via POST /v1/auth/login
+ * (lib/owner-admin-sign-in.ts), behind the same signIn()/useSession() names.
  */
 export default function Login() {
   usePageMeta("pages.login.name", "pages.login.description");
