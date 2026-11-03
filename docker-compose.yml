@@ -41,6 +41,9 @@ services:
     environment:
       PORT: "8080"
       DATABASE_URL: postgres://${POSTGRES_USER:-app}:${POSTGRES_PASSWORD:-app_secret}@postgres:5432/${POSTGRES_DB:-app}?sslmode=disable
+      # Signs session JWTs (docs/architecture/services.md §2.2). Generated at
+      # deploy time; the fallback here is for local/CI only.
+      JWT_SIGNING_SECRET: ${JWT_SIGNING_SECRET:-dev-only-change-me-at-deploy}
     ports:
       - "${BACKEND_PORT:-8080}:8080"
     restart: unless-stopped
