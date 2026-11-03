@@ -38,7 +38,8 @@ function Form() {
   const [note, setNote] = useState("");
   const [price, setPrice] = useState("");
   const [photo, setPhoto] = useState("");
-  const [sent, setSent] = useState("");
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState<SavedProduct | null>(null);
   const [error, setError] = useState("");
 
   const group = telegram[0]?.group ?? "";
@@ -50,7 +51,7 @@ function Form() {
     setPhoto(URL.createObjectURL(file));
   }
 
-  function submit(e: FormEvent) {
+  async function submit(e: FormEvent) {
     e.preventDefault();
     const amount = Number(price);
     if (!name.trim() || !note.trim() || !Number.isFinite(amount) || amount <= 0) {
@@ -58,8 +59,10 @@ function Form() {
       return;
     }
     setError("");
-    const row = addProduct({ name: name.trim(), note: note.trim(), price: amount, image: photo });
-    void send(row.name, row.price).then((s) => setSent(s.text));
+    setSaving(true);
+    const row = await addProduct({ name: name.trim(), note: note.trim(), price: amount, image: photo });
+    setSaving(false);
+    setSaved(row);
   }
 
   return (
