@@ -107,12 +107,12 @@ function Form() {
           )}
 
           <div className="flex flex-wrap items-center gap-[var(--space-4)]">
-            <button type="submit" data-testid="save-product"
-              className="inline-flex items-center gap-2 whitespace-nowrap bg-accent px-[var(--space-6)] py-2.5 font-display text-accent-ink">
+            <button type="submit" data-testid="save-product" disabled={saving}
+              className="inline-flex items-center gap-2 whitespace-nowrap bg-accent px-[var(--space-6)] py-2.5 font-display text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-60">
               <Icon name="check" size={18} />
               Save and send to Telegram
             </button>
-            {sent && (
+            {saved && (
               <button type="button" onClick={() => navigate("/cms/products")}
                 className="inline-flex items-center gap-2 whitespace-nowrap border border-line px-[var(--space-4)] py-2.5 text-sm">
                 See the list
@@ -121,10 +121,12 @@ function Form() {
             )}
           </div>
 
-          {sent && (
+          {saved && (
             <p data-testid="saved-notice" className="inline-flex items-center gap-2 border-t border-line pt-[var(--space-4)] text-sm text-ink">
               <Icon name="done" size={16} />
-              Saved, and sent to the Telegram group.
+              {saved.telegram_sent
+                ? "Saved, and sent to the Telegram group."
+                : "Saved, but the Telegram group did not receive it."}
             </p>
           )}
         </form>
