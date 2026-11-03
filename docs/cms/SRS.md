@@ -78,15 +78,14 @@ Behaviour:
 
 Behaviour:
 
-1. A caller with no session calls `POST /v1/products`; the system responds 401 and stores nothing.
-2. A caller with a session that is not a valid admin's calls `POST /v1/products`; the system responds 403 and stores nothing.
+1. A caller with no session, or with a session that is invalid, expired or forged, calls `POST /v1/products`; the system responds 401 and stores nothing. One status covers both cases — matching `auth` module's AUTH-003 and `data` module's DATA-002, which use the same rule for their own session-gated reads.
 
 **Acceptance criteria**
 
 | # | Given | When | Then |
 |---|---|---|---|
 | AC-1 | No session | A caller calls `POST /v1/products` with a valid body | 401, no row created, no Telegram message sent |
-| AC-2 | An invalid/expired session token | A caller calls `POST /v1/products` with a valid body | 403, no row created, no Telegram message sent |
+| AC-2 | An invalid/expired/forged session token | A caller calls `POST /v1/products` with a valid body | 401, no row created, no Telegram message sent |
 
 **Failure, boundary and permission behaviour**
 
