@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { T, useContent } from "../editable";
 import { usePageMeta } from "../seo";
 import { signIn } from "../lib/session";
+import { login } from "../lib/owner-admin-sign-in";
 import Icon from "../components/Icon";
 import { Picture } from "../picture";
 
@@ -11,8 +12,8 @@ import { Picture } from "../picture";
  * sign-up link anywhere on this site, by the owner's instruction, so the page
  * says in words who it is for and how a new admin is added.
  *
- * The design's mock session (src/lib/session.ts) takes any address and no
- * password is checked; the backend story replaces it behind the same names.
+ * Checks against the real admins table via POST /v1/auth/login
+ * (lib/owner-admin-sign-in.ts), behind the same signIn()/useSession() names.
  */
 export default function Login() {
   usePageMeta("pages.login.name", "pages.login.description");
@@ -20,17 +21,26 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const ownerEmail = useContent<string>("contact.email");
 
-  function submit(e: FormEvent) {
+  async function submit(e: FormEvent) {
     e.preventDefault();
     if (!email.trim() || !password) {
       setError(true);
       return;
     }
     setError(false);
-    signIn(email.trim(), undefined, "owner");
-    navigate("/cms/products");
+    setSubmitting(true);
+    try {
+      const session = await login(email.trim(), password);
+      signIn(session.email, session.name, session.role);
+      navigate("/cms/products");
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const field =
@@ -61,8 +71,8 @@ export default function Login() {
                 <T k="pages.login.error" />
               </p>
             )}
-            <button type="submit" data-testid="sign-in"
-              className="mt-[var(--space-2)] inline-flex items-center justify-center gap-2 whitespace-nowrap bg-accent px-[var(--space-6)] py-3 font-display text-accent-ink transition-opacity hover:opacity-90">
+            <button type="submit" data-testid="sign-in" disabled={submitting}
+              className="mt-[var(--space-2)] inline-flex items-center justify-center gap-2 whitespace-nowrap bg-accent px-[var(--space-6)] py-3 font-display text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-60">
               <T k="pages.login.submit" />
               <Icon name="arrow" size={18} />
             </button>
