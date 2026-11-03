@@ -100,6 +100,7 @@ Behaviour:
 | Upstream failure | Telegram API unreachable or returns an error | Row is still saved (CMS-002 AC-2); `saved-notice` reports the Telegram failure, no retry is built since the design has no retry affordance |
 | Upstream failure | Database unavailable while saving | 500-class response; nothing is saved, no Telegram message is attempted (there is nothing to notify about) |
 | Boundary | Photo omitted | Accepted — the design's own form allows submitting with the placeholder-photo state (`photo` optional in the existing `Form`) |
+| Invalid input | Photo file's content type is not `image/jpeg`, `image/png` or `image/webp`, or exceeds 5MB | `POST /v1/products` responds 400; no row created, no file written, no Telegram message sent — same `form-error` style the client already shows for other invalid input |
 | Conflict | Two admins submit the same product at the same moment | Not applicable: each submission creates its own independent row; there is no shared record being edited |
 
 **Data touched**
@@ -109,7 +110,7 @@ Behaviour:
 | name | text | yes | non-empty |
 | note | text | yes | non-empty, short description |
 | price | numeric | yes | > 0, USD |
-| image | text | no | URL/path; blank uses the existing placeholder slot |
+| image | text | no | server-assigned path `/images/products/<id>.<ext>` once a file is uploaded (CMS-001 behaviour 4); blank uses the existing placeholder slot when no file is sent |
 | added | text | yes | set by the server, ISO date, not supplied by the client |
 
 ## 5. Screens
