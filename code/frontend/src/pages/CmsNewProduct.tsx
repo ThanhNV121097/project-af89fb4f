@@ -8,8 +8,7 @@ import ProductImage from "../components/ProductImage";
 import RequireSignIn from "../components/RequireSignIn";
 import { useContent } from "../editable";
 import { cmsNav } from "../cms-nav";
-import { addProduct } from "../lib/mock/products";
-import { messageFor, send } from "../lib/mock/telegram";
+import { addProduct, messageFor } from "../lib/mock/add-product-saves-and-notifies-telegram";
 
 /**
  * Add a product: a photo, a name, a short description and a price — the four
