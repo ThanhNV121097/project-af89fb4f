@@ -25,6 +25,12 @@ interface Product {
  * right, and the shelf itself — four cut-out goods on the shop's own dark
  * ground — running off the right edge so the row reads as continuing.
  * Everything below it is the rest of the shelf, paged.
+ *
+ * Story: docs/site/stories/the-site-as-designed.md (SC-1…SC-9).
+ * Test cases: docs/site/test-cases/the-site-as-designed.md.
+ * Reads the static fixtures in src/data/ via useCollection — the "Site
+ * data from the database" story swaps that hook's internals for a real API
+ * call later; this component is unchanged by that swap.
  */
 export default function Home() {
   // The window carries the four newest; the shelf below carries the others,
