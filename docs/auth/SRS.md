@@ -76,7 +76,7 @@ Behaviour:
 
 1. A visitor with no session requests `/cms/products` or `/cms/products/new` directly (typed address, bookmark, or link).
 2. The system does not render the page's data; it shows the sign-in gate (`RequireSignIn`, already built) with a link to `/login`.
-3. The same refusal applies to the two CMS API endpoints this module protects indirectly: any request to a CMS-only endpoint with no valid session returns 401.
+3. The same refusal applies to the one CMS write endpoint this module gates indirectly: `POST /v1/products` (defined in the `cms` module, CMS-003) returns 401 to any request with no valid session, or with a session that is invalid, expired or forged — one status for "session present but not good," matching CMS-003 and DATA-002. The CMS list read, `GET /v1/products`, is **not** gated by this module: DATA-001 makes it public for the Home page, and the CMS list screen reads the same public endpoint — the page itself, not the data, is what `RequireSignIn` protects (AC-1 above).
 
 **Acceptance criteria**
 
@@ -84,7 +84,7 @@ Behaviour:
 |---|---|---|---|
 | AC-1 | No session in the browser | The visitor navigates to `/cms/products` | The sign-in gate is shown, with a link to `/login`, not the product table |
 | AC-2 | No session in the browser | The visitor navigates to `/cms/products/new` | The sign-in gate is shown, not the add-product form |
-| AC-3 | No valid session cookie/token on the request | A caller calls a CMS-only endpoint directly | The endpoint responds 401 |
+| AC-3 | No session, or an invalid/expired/forged session token | A caller calls `POST /v1/products` directly | The endpoint responds 401 (same status for both cases) |
 
 **Failure, boundary and permission behaviour**
 
