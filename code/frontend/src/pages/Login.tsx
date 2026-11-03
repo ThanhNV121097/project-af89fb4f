@@ -72,8 +72,8 @@ export default function Login() {
                 <T k="pages.login.error" />
               </p>
             )}
-            <button type="submit" data-testid="sign-in"
-              className="mt-[var(--space-2)] inline-flex items-center justify-center gap-2 whitespace-nowrap bg-accent px-[var(--space-6)] py-3 font-display text-accent-ink transition-opacity hover:opacity-90">
+            <button type="submit" data-testid="sign-in" disabled={submitting}
+              className="mt-[var(--space-2)] inline-flex items-center justify-center gap-2 whitespace-nowrap bg-accent px-[var(--space-6)] py-3 font-display text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-60">
               <T k="pages.login.submit" />
               <Icon name="arrow" size={18} />
             </button>
