@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { T, useContent } from "../editable";
 import { usePageMeta } from "../seo";
 import { signIn } from "../lib/session";
+import { login } from "../lib/mock/owner-admin-sign-in";
 import Icon from "../components/Icon";
 import { Picture } from "../picture";
 
@@ -11,8 +12,9 @@ import { Picture } from "../picture";
  * sign-up link anywhere on this site, by the owner's instruction, so the page
  * says in words who it is for and how a new admin is added.
  *
- * The design's mock session (src/lib/session.ts) takes any address and no
- * password is checked; the backend story replaces it behind the same names.
+ * Checks against the mock admin list in lib/mock/owner-admin-sign-in.ts; the
+ * backend story replaces that module with a real POST /v1/auth/login call,
+ * behind the same signIn()/useSession() names.
  */
 export default function Login() {
   usePageMeta("pages.login.name", "pages.login.description");
@@ -20,17 +22,26 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const ownerEmail = useContent<string>("contact.email");
 
-  function submit(e: FormEvent) {
+  async function submit(e: FormEvent) {
     e.preventDefault();
     if (!email.trim() || !password) {
       setError(true);
       return;
     }
     setError(false);
-    signIn(email.trim(), undefined, "owner");
-    navigate("/cms/products");
+    setSubmitting(true);
+    try {
+      const session = await login(email.trim(), password);
+      signIn(session.email, session.name, session.role);
+      navigate("/cms/products");
+    } catch {
+      setError(true);
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   const field =
