@@ -34,6 +34,19 @@ export interface Collection {
 
 export const schema = schemaFile as { collections: Record<string, Collection> };
 
+// The Studio's live-preview hooks (editable.tsx) read/write an in-memory
+// snapshot of whatever collection is on screen, for its canvas inspector —
+// unrelated to useCollection's own fetch. Kept as a tiny store here so that
+// file does not need to change; this story adds no write endpoint, so
+// setCollection only ever reflects the Studio's own local edit, never saved.
+let studioSnapshot: Record<string, Row[]> = {};
+export function setCollection(name: string, rows: Row[]) {
+  studioSnapshot = { ...studioSnapshot, [name]: rows };
+}
+export function collections(): Record<string, Row[]> {
+  return studioSnapshot;
+}
+
 const base = (import.meta.env.VITE_API_URL as string | undefined) ?? "/api";
 
 /** The session's bearer token, once the auth story's session carries one. */
