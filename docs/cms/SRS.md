@@ -39,11 +39,13 @@ Behind the sign-in, the shop owner and admins manage the shelf's products: see t
 
 Behaviour:
 
-1. The admin fills Name, Short description, Price (and optionally a Photo) on `/cms/products/new` and submits.
+1. The admin fills Name, Short description, Price (and optionally a Photo file) on `/cms/products/new` and submits.
 2. The system validates the form client-side exactly as built today: name and note non-empty, price a number greater than 0 — unchanged from the existing `Form`'s `submit` check.
-3. On a valid submit, `POST /v1/products` stores a new row (name, note, price, image) in the `products` table.
-4. The response is the saved row, including its assigned id and `added` date.
-5. The new row appears on `GET /v1/products` thereafter — visible both in the CMS list (`/cms/products`) and the public Home page.
+3. The form submits as `multipart/form-data` to `POST /v1/products`: fields `name`, `note`, `price`, and, when a file was chosen in the existing `<input type="file" accept="image/jpeg,image/png,image/webp">`, a part named `image` carrying that file.
+4. When a file part is present, the server writes it to disk under the existing photo-slot convention — `/images/products/<id>.<ext>` (`<ext>` from the file's content type: `jpg`, `png` or `webp`), `<id>` the row's newly assigned id — and stores that path string in `products.image`. When no file part is present, `products.image` is stored empty, same as today, and `ProductImage`'s existing placeholder slot renders.
+5. `POST /v1/products` stores the new row (name, note, price, image) in the `products` table.
+6. The response is the saved row, including its assigned id and `added` date.
+7. The new row appears on `GET /v1/products` thereafter — visible both in the CMS list (`/cms/products`) and the public Home page, its photo served from the `image` path.
 
 **Acceptance criteria**
 
@@ -52,6 +54,8 @@ Behaviour:
 | AC-1 | A signed-in admin on `/cms/products/new` | The admin fills name, note, price > 0 and submits | `POST /v1/products` is called; the response's row appears at the top of `/cms/products`'s table |
 | AC-2 | The row from AC-1 was saved | A visitor loads the Home page | The new product is present among the public listing |
 | AC-3 | The form is empty, or price is 0 or negative | The admin submits | The existing `form-error` message is shown ("Fill in the name, the description and a price above zero."); no request is sent |
+| AC-4 | A signed-in admin chooses a JPEG/PNG/WebP file for Photo and fills the rest | The admin submits | The server stores the file at `/images/products/<id>.<ext>`, `products.image` holds that path, and the saved row's photo renders on both `/cms/products` and the public Home page |
+| AC-5 | No file is chosen for Photo | The admin fills the rest and submits | `products.image` is stored empty; the saved row renders `ProductImage`'s existing placeholder slot, same as a product with no photo today |
 
 **Requirement CMS-002 — Saving sends the Telegram message**
 
