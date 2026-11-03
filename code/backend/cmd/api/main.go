@@ -1,6 +1,8 @@
 // Command api is Shelf's backend entrypoint. It connects to the database,
-// applies pending migrations, then serves /healthz. Product, admin and
-// telegram routes land in the stories that need them.
+// applies pending migrations, then serves /healthz plus the public product
+// reads and the admin-gated admins/telegram reads (docs/architecture/
+// services.md §3.2-3.3, §3.5-3.8). POST /v1/auth/login and POST /v1/products
+// land in the stories that own them.
 package main
 
 import (
