@@ -124,8 +124,10 @@ Behaviour:
 
 | Area | Requirement |
 |---|---|
-| Performance | `POST /v1/products` responds within 2s at 1 Mbps, cold cache, including the Telegram call attempt |
+| Performance | `POST /v1/products` responds within 2s at 1 Mbps, cold cache, including the Telegram call attempt and, when present, writing the photo file (capped at 5MB) |
 | Privacy | The Telegram bot token is kept server-side as a secret, never sent to the browser |
+| Accessibility | Form inputs are labelled and keyboard reachable, the file input included; the error message is announced (already built with an icon + text pattern, same as `auth`'s) |
+| Responsive | Works at 320px and up; the two-column layout (form + live preview) collapses to one column below `lg`, as already built |
 
 ## 7. Dependencies and assumptions
 
