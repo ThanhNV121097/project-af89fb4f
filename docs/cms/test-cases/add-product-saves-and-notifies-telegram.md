@@ -82,7 +82,8 @@ Check: interact_page
 **When**: The admin clicks Save
 **Then**: The shop's configured Telegram group receives a message reading `New on the shelf: <name> — <price>`
 Traces: SC-6 (CMS-002 AC-1)
-Check: manual — no tool here can read the contents of an external Telegram group; a person must check the group received the message. (The save's own `telegram_sent: true` flag, which drives the UI copy, is separately checked below with `fetch_url`/`interact_page`.)
+Check: manual
+Note: no instrument here can read an external Telegram group's messages; a person confirms delivery. The save's own `telegram_sent: true` flag, which drives the UI copy, is checked separately below with `fetch_url`/`interact_page`.
 
 ---
 
