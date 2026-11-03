@@ -12,7 +12,7 @@ import ProductImage from "../components/ProductImage";
 import RequireSignIn from "../components/RequireSignIn";
 import { cmsNav } from "../cms-nav";
 import { formatDate, formatPrice } from "../lib/format";
-import { addedProducts, subscribe } from "../lib/mock/products";
+import { addedProducts, subscribe } from "../lib/mock/add-product-saves-and-notifies-telegram";
 
 interface Row {
   id: string;
