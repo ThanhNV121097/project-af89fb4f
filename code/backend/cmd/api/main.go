@@ -21,6 +21,10 @@ func main() {
 	if dsn == "" {
 		log.Fatal("DATABASE_URL is required")
 	}
+	jwtSecret := os.Getenv("JWT_SIGNING_SECRET")
+	if jwtSecret == "" {
+		log.Fatal("JWT_SIGNING_SECRET is required")
+	}
 
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {
@@ -36,12 +40,20 @@ func main() {
 		log.Fatalf("run migrations: %v", err)
 	}
 
+	secret := []byte(jwtSecret)
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("/healthz", healthz(db))
+	mux.HandleFunc("GET /v1/products", listProductsHandler(db))
+	mux.HandleFunc("GET /v1/products/{id}", getProductHandler(db))
+	mux.HandleFunc("GET /v1/admins", requireAdmin(secret, listAdminsHandler(db)))
+	mux.HandleFunc("GET /v1/admins/{id}", requireAdmin(secret, getAdminHandler(db)))
+	mux.HandleFunc("GET /v1/telegram", requireAdmin(secret, listTelegramHandler(db)))
+	mux.HandleFunc("GET /v1/telegram/{id}", requireAdmin(secret, getTelegramHandler(db)))
 
 	port := firstNonEmpty(os.Getenv("PORT"), os.Getenv("APP_PORT"), "8080")
 	log.Printf("listening on :%s", port)
-	if err := http.ListenAndServe(":"+port, mux); err != nil {
+	if err := http.ListenAndServe(":"+port, withRequestID(mux)); err != nil {
 		log.Fatalf("serve: %v", err)
 	}
 }
