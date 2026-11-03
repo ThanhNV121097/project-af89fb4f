@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { T, useContent } from "../editable";
 import { usePageMeta } from "../seo";
 import { signIn } from "../lib/session";
-import { login } from "../lib/mock/owner-admin-sign-in";
+import { login } from "../lib/owner-admin-sign-in";
 import Icon from "../components/Icon";
 import { Picture } from "../picture";
 
