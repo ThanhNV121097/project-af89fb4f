@@ -92,7 +92,7 @@ Behaviour:
 | Case | Condition | Expected behaviour |
 |---|---|---|
 | Invalid input | Name or note empty, or price ≤ 0, submitted anyway (e.g. direct API call bypassing the form) | `POST /v1/products` responds 400; no row created, no Telegram message sent |
-| Not permitted | No session / invalid session | 401 / 403 — CMS-003 |
+| Not permitted | No session / invalid session | 401 for both — CMS-003 |
 | Upstream failure | Telegram API unreachable or returns an error | Row is still saved (CMS-002 AC-2); `saved-notice` reports the Telegram failure, no retry is built since the design has no retry affordance |
 | Upstream failure | Database unavailable while saving | 500-class response; nothing is saved, no Telegram message is attempted (there is nothing to notify about) |
 | Boundary | Photo omitted | Accepted — the design's own form allows submitting with the placeholder-photo state (`photo` optional in the existing `Form`) |
