@@ -92,8 +92,8 @@ Behaviour:
 |---|---|---|
 | Invalid input | Email or password field left empty | Submit is blocked client-side; the existing inline error state is shown (already built in Login.tsx), nothing is sent to the server |
 | Not found / wrong password | Email not in `admins`, or password does not match | Generic 401, generic `pages.login.error` copy — AUTH-002 |
-| Not permitted | No session, CMS page or CMS endpoint requested | Redirect to `/login` (page) or 401 (endpoint) — AUTH-003 |
-| Expired/invalid session | A stored session token is malformed, expired, or signed with an old secret | Treated as no session: the sign-in gate is shown, same as AUTH-003 |
+| Not permitted | No session, CMS page or `POST /v1/products` requested | Redirect to `/login` (page) or 401 (endpoint) — AUTH-003 |
+| Expired/invalid session | A stored session token is malformed, expired, forged, or signed with an old secret | Treated the same as no session: the sign-in gate is shown on a page, 401 on `POST /v1/products` — one status for "session present but not good," never 403, matching CMS-003 and DATA-002 |
 | Account removed | An admin's row is deleted from the database while they hold a live session | Not applicable: the approved design has no live session-revocation screen; the existing session remains valid until it expires, consistent with the "sign in is just a login screen" scope the brief describes |
 | Conflict | Two admins editing the same session | Not applicable: each admin holds their own independent session; there is no shared-session object to conflict over |
 | Upstream failure | Database unavailable during login | 500-class response; the page shows the same generic `pages.login.error` copy rather than a distinct error screen, since the approved design has one error state for this form |
