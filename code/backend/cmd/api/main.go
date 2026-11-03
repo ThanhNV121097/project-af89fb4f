@@ -21,6 +21,10 @@ func main() {
 	if dsn == "" {
 		log.Fatal("DATABASE_URL is required")
 	}
+	jwtSecret := os.Getenv("JWT_SIGNING_SECRET")
+	if jwtSecret == "" {
+		log.Fatal("JWT_SIGNING_SECRET is required")
+	}
 
 	db, err := sql.Open("pgx", dsn)
 	if err != nil {
